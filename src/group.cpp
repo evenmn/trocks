@@ -37,3 +37,9 @@ void rm_node(string groupname, string nodename)
     int i = 1;
 }
 
+void list_nodes(string groupname, vector<string> nodes)
+{
+    for(auto node : nodes){
+        cout << node << endl;
+    }
+}

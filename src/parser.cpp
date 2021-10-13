@@ -78,16 +78,30 @@ void parser(int argc, char** argv)
         else if(keyword == "add_node"){
             string group = argv[2];
             string node = argv[3];
-            if(node == "compute" || node == "gpu" || node == "cpu"){
-                cout << "Node name cannot be 'compute' or 'gpu'" << endl;
+            auto it = find(groups.begin(), groups.end(), node);
+            if (it != groups.end()){
+                add_node(group, node);
+            }
+            else {
+                cout << "Node cannot have the same name as a group" << endl;
                 exit(0);
             }
-            add_node(group, node);
         }
         else if(keyword == "rm_node"){
             string group = argv[2];
             string node = argv[3];
             rm_node(group, node);
+        }
+        else if(keyword == "list_nodes"){
+            string group = argv[2];
+            auto it = find(groups.begin(), groups.end(), group);
+            if (it != groups.end()){
+                int index = it - groups.begin();
+                list_nodes(group, nodes[index]);
+            }
+            else{
+                cout << "Group '" << group << "' does not exist" << endl;
+            }
         }
         else{
             cout << "'" << keyword << "' is not a known keyword!" << endl;
