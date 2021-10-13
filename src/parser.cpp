@@ -24,56 +24,70 @@ vector<string> txt2string(string filename)
 
 void parser(int argc, char** argv)
 {
-    vector<string> known_cpu_nodes = txt2string(std::filesystem::absolute("txt/known_cpu_nodes.txt"));
-    vector<string> known_gpu_nodes = txt2string(std::filesystem::absolute("txt/known_cpu_nodes.txt"));
+    // check all groups
+    vector<string> groups;
+    vector<vector<string>> nodes;
+    string path = std::filesystem::absolute("txt");
+    for (const auto & entry : fs::directory_iterator(path)){
+        string group_path = entry.path();
+
+        // get nodes
+        nodes.push_back(txt2string(group_path));
+
+        // get group names
+        size_t pos = 0;
+        while ((pos = group_path.find("/")) != string::npos) {
+            group_path.erase(0, pos + 1);
+        }
+        string groupname = group_path.substr(0, group_path.find("."));
+        groups.push_back(groupname);
+    }
 
     if(argc >= 2) {
         string keyword = argv[1];
         if(keyword == "run"){
             string node = argv[2];
             string command = argv[3];
-            if(node == "compute" || node == "cpu"){
-                for(auto i : known_cpu_nodes){
+            auto it = find(groups.begin(), groups.end(), node);
+            if (it != groups.end()){
+                int index = it - groups.begin();
+                for(auto i : nodes[index]){
                     run(i, command);
                 }
-            }
-            else if(node == "gpu"){
-                for(auto i : known_gpu_nodes){
-                    run(i, command);
-                }
-            }
-            else {
-                run(node, command);
             }
         }
         else if(keyword == "surun"){
             string node = argv[2];
             string command = argv[3];
-            if(node == "compute" || node == "cpu"){
-                for(auto i : known_cpu_nodes){
+            auto it = find(groups.begin(), groups.end(), node);
+            if (it != groups.end()){
+                int index = it - groups.begin();
+                for(auto i : nodes[index]){
                     surun(i, command);
+                }
             }
         }
-        else if(node == "gpu"){
-            for(auto i : known_gpu_nodes){
-                surun(i, command);
-            }
+        else if(keyword == "add_group"){
+            string group = argv[2];
+            add_group(group);
         }
-        else {
-            surun(node, command);
-        }
+        else if(keyword == "rm_group"){
+            string group = argv[2];
+            rm_group(group);
         }
         else if(keyword == "add_node"){
-            string node = argv[2];
+            string group = argv[2];
+            string node = argv[3];
             if(node == "compute" || node == "gpu" || node == "cpu"){
                 cout << "Node name cannot be 'compute' or 'gpu'" << endl;
                 exit(0);
             }
-            add_node(node);
+            add_node(group, node);
         }
         else if(keyword == "rm_node"){
-            string node = argv[2];
-            rm_node(node);
+            string group = argv[2];
+            string node = argv[3];
+            rm_node(group, node);
         }
         else{
             cout << "'" << keyword << "' is not a known keyword!" << endl;
