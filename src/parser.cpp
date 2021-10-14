@@ -3,18 +3,14 @@
 vector<string> txt2string(string filename)
 {
     vector<string> lines;
-    ifstream myReadFile;
-    myReadFile.open(filename);
-    char output[100];
-    if (myReadFile.is_open()) {
-        while (!myReadFile.eof()) {
-            myReadFile >> output;
-            string s;
-            stringstream ss;
-            ss << output;
-            ss >> s;
-            lines.push_back(s);
+    ifstream infile;
+    infile.open(filename);
+    if (infile.is_open()) {
+        string line;
+        while (getline(infile, line)) {
+            lines.push_back(line);
         }
+        infile.close();
     }
     else {
         cout << "File '" + filename + "' cannot be opened" << endl;
@@ -45,7 +41,10 @@ void parser(int argc, char** argv)
 
     if(argc >= 2) {
         string keyword = argv[1];
-        if(keyword == "run"){
+        if(keyword == "-h" || keyword == "-help" || keyword == "help"){
+           print_help(); 
+        }
+        else if(keyword == "run"){
             string node = argv[2];
             string command = argv[3];
             auto it = find(groups.begin(), groups.end(), node);
@@ -78,14 +77,7 @@ void parser(int argc, char** argv)
         else if(keyword == "add_node"){
             string group = argv[2];
             string node = argv[3];
-            auto it = find(groups.begin(), groups.end(), node);
-            if (it != groups.end()){
-                add_node(group, node);
-            }
-            else {
-                cout << "Node cannot have the same name as a group" << endl;
-                exit(0);
-            }
+            add_node(group, node);
         }
         else if(keyword == "rm_node"){
             string group = argv[2];
@@ -97,11 +89,14 @@ void parser(int argc, char** argv)
             auto it = find(groups.begin(), groups.end(), group);
             if (it != groups.end()){
                 int index = it - groups.begin();
-                list_nodes(group, nodes[index]);
+                list_nodes(nodes[index]);
             }
             else{
                 cout << "Group '" << group << "' does not exist" << endl;
             }
+        }
+        else if(keyword == "list_groups"){
+            list_groups(groups);
         }
         else{
             cout << "'" << keyword << "' is not a known keyword!" << endl;

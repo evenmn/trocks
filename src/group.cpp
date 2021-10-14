@@ -33,13 +33,18 @@ void add_node(string groupname, string nodename)
 }
 
 void rm_node(string groupname, string nodename)
-{
-    int i = 1;
-}
+{}
 
-void list_nodes(string groupname, vector<string> nodes)
+void list_nodes(vector<string> nodes)
 {
     for(auto node : nodes){
         cout << node << endl;
+    }
+}
+
+void list_groups(vector<string> groups)
+{
+    for(auto group : groups){
+        cout << group << endl;
     }
 }

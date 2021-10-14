@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -11,4 +12,5 @@ void add_group(string groupname);
 void rm_group(string groupname);
 void add_node(string groupname, string nodename);
 void rm_node(string groupname, string nodename);
-void list_nodes(string groupname, vector<string> nodes);
+void list_nodes(vector<string> nodes);
+void list_groups(vector<string> groups);
