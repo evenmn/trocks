@@ -105,5 +105,6 @@ void parser(int argc, char** argv)
     else {
         cout << "Trocks version 0.0.1" << endl;
         cout << "Author: Even M. Nordhagen" << endl;
+        cout << "url: github.com/evenmn/trocks" << endl;
     }
 }
