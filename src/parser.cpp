@@ -21,10 +21,11 @@ vector<string> txt2string(string filename)
 void parser(int argc, char** argv)
 {
     // check all groups
+    string group_dir = "/var/run/trocks";
     vector<string> groups;
     vector<vector<string>> nodes;
-    string path = std::filesystem::absolute("txt");
-    for (const auto & entry : fs::directory_iterator(path)){
+    //string path = std::filesystem::absolute(group_dir);
+    for (const auto & entry : fs::directory_iterator(group_dir)){
         string group_path = entry.path();
 
         // get nodes
@@ -68,21 +69,21 @@ void parser(int argc, char** argv)
         }
         else if(keyword == "add_group"){
             string group = argv[2];
-            add_group(group);
+            add_group(group, group_dir);
         }
         else if(keyword == "rm_group"){
             string group = argv[2];
-            rm_group(group);
+            rm_group(group, group_dir);
         }
         else if(keyword == "add_node"){
             string group = argv[2];
             string node = argv[3];
-            add_node(group, node);
+            add_node(group, node, group_dir);
         }
         else if(keyword == "rm_node"){
             string group = argv[2];
             string node = argv[3];
-            rm_node(group, node);
+            rm_node(group, node, group_dir);
         }
         else if(keyword == "list_nodes"){
             string group = argv[2];

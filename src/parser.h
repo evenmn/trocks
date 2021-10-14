@@ -18,3 +18,4 @@ namespace fs = std::filesystem;
 
 vector<string> txt2vector(string filename);
 void parser(int argc, char** argv);
+
