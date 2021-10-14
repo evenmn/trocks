@@ -8,6 +8,11 @@ A light-weight C++ code for performing operations (executing commands etc) acros
 ```bash
 make compile
 ```
+In addition, Trocks looks for groups at `/var/run/trocks/`. This directory has to be created manually the first time and given open permissions:
+```bash
+sudo mkdir /var/run/trocks
+sudo chmod 777 /var/run/trocks
+```
 
 ## How to use
 Run command "command" on remote node "nodename":
