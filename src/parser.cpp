@@ -55,6 +55,9 @@ void parser(int argc, char** argv)
                     run(i, command);
                 }
             }
+            else {
+                run(node, command);
+            }
         }
         else if(keyword == "surun"){
             string node = argv[2];
@@ -65,6 +68,9 @@ void parser(int argc, char** argv)
                 for(auto i : nodes[index]){
                     surun(i, command);
                 }
+            }
+            else {
+                surun(node, command);
             }
         }
         else if(keyword == "add_group"){
