@@ -1,15 +1,19 @@
 #include "run.h"
 
-void run(string node, string command)
+void run(string node, string command, bool background)
 {
     string exec = "ssh " + node + " " + command;
-    const char *cexec = exec.c_str();
-    system(cexec);
+    if(background){
+        exec += " &>/dev/null &";
+    }
+    system(exec.c_str());
 }
 
-void surun(string node, string command)
+void surun(string node, string command, bool background)
 {
     string exec = "ssh -t " + node + " sudo " + command;
-    const char *cexec = exec.c_str();
-    system(cexec);
+    if(background){
+        exec += " &>/dev/null &";
+    }
+    system(exec.c_str());
 }

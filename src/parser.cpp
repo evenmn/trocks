@@ -48,29 +48,43 @@ void parser(int argc, char** argv)
         else if(keyword == "run"){
             string node = argv[2];
             string command = argv[3];
+            bool background;
+            if(argc == 4){
+                background = false;
+            }
+            else{
+                istringstream(argv[4]) >> std::boolalpha >> background;
+            }
             auto it = find(groups.begin(), groups.end(), node);
             if (it != groups.end()){
                 int index = it - groups.begin();
                 for(auto i : nodes[index]){
-                    run(i, command);
+                    run(i, command, background);
                 }
             }
             else {
-                run(node, command);
+                run(node, command, background);
             }
         }
         else if(keyword == "surun"){
             string node = argv[2];
             string command = argv[3];
+            bool background;
+            if(argc == 4){
+                background = false;
+            }
+            else{
+                istringstream(argv[4]) >> std::boolalpha >> background;
+            }
             auto it = find(groups.begin(), groups.end(), node);
             if (it != groups.end()){
                 int index = it - groups.begin();
                 for(auto i : nodes[index]){
-                    surun(i, command);
+                    surun(i, command, background);
                 }
             }
             else {
-                surun(node, command);
+                surun(node, command, background);
             }
         }
         else if(keyword == "add_group"){
@@ -110,7 +124,7 @@ void parser(int argc, char** argv)
         }
     }
     else {
-        cout << "Trocks version 0.0.1" << endl;
+        cout << "Trocks version 0.0.2" << endl;
         cout << "Author: Even M. Nordhagen" << endl;
         cout << "url: github.com/evenmn/trocks" << endl;
     }
