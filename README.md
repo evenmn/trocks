@@ -17,12 +17,12 @@ sudo chmod 777 /var/run/trocks
 ## How to use
 Run command "command" on remote node "nodename":
 ```bash
-trocks run <nodename> <command>
+trocks run <nodename> <command> <run in background=false>
 ```
 
 Run sudo command "command" on remote node "nodename":
 ```bash
-trocks surun <nodename> <command>
+trocks surun <nodename> <command> <run in background=false>
 ```
 
 ## Groups
