@@ -2,7 +2,7 @@
 A light-weight C++ code for performing operations (executing commands etc) across the compute nodes of HPC clusters. Can be seen as Rocks' stupid little brother. Tested on Linux (Ubuntu 20.04) and macOS (Big Sur 11.6).
 
 ## Prerequisites
-- g++ 9.4 or newer (utilizes std::filesystem in C++17)
+- g++ 9.3 or newer (utilizes std::filesystem in C++17)
 
 ## Compile
 ```bash
