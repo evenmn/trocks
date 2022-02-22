@@ -42,7 +42,7 @@ void parser(int argc, char** argv)
 
     if(argc >= 2) {
         string keyword = argv[1];
-        if(keyword == "-h" || keyword == "-help" || keyword == "help"){
+        if(keyword == "-h" || keyword == "--help"){
            print_help(); 
         }
         else if(keyword == "run"){
