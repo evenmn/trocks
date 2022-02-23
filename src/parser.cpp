@@ -1,5 +1,11 @@
 #include "parser.h"
 
+
+/* ----------------------------------------------------------------------------
+   Read a text file 'filename' and convert it to a vector of strings where each
+   element corresponds to the line in the text file
+------------------------------------------------------------------------------- */
+
 vector<string> txt2string(string filename)
 {
     vector<string> lines;
@@ -17,6 +23,12 @@ vector<string> txt2string(string filename)
     }
     return lines;
 }
+
+
+/* ----------------------------------------------------------------------------
+   Parsing command line arguments and calling functions defined in 'run.h' or
+   'group.h'
+------------------------------------------------------------------------------- */
 
 void parser(int argc, char** argv)
 {

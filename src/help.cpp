@@ -1,11 +1,15 @@
 #include "help.h"
 
 
+/* ----------------------------------------------------------------------------
+   Print out help instructions to terminal when adding '--help' flag
+------------------------------------------------------------------------------- */
+
 void print_help()
 {
     cout << "usage: trocks [option] [arg]" << endl;
     cout << "Options and arguments:" << endl;
-    cout << "-h or -help or help   :" << endl;
+    cout << "-h or --help   :" << endl;
     cout << "   Help (you already know this)" << endl;
     cout << "run <nodename or groupname> <command>:" << endl;
     cout << "   Run command 'command' on node 'nodename' or group of nodes 'groupname'" << endl;
