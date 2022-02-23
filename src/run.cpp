@@ -1,3 +1,6 @@
+#include <iostream>
+#include <string>
+
 #include "run.h"
 
 
@@ -6,9 +9,9 @@
    using the 'background' argument.
 ------------------------------------------------------------------------------- */
 
-void run(string node, string command, bool background)
+void run(std::string node, std::string command, bool background)
 {
-    string exec = "ssh " + node + " " + command;
+    std::string exec = "ssh " + node + " " + command;
     if(background){
         exec += " &>/dev/null &";
     }
@@ -20,9 +23,9 @@ void run(string node, string command, bool background)
    Run a command 'command' on a node 'node' in sudo mode. Commands can be run 
    in background using the 'background' argument
 ------------------------------------------------------------------------------- */
-void surun(string node, string command, bool background)
+void surun(std::string node, std::string command, bool background)
 {
-    string exec = "ssh -t " + node + " sudo " + command;
+    std::string exec = "ssh -t " + node + " sudo " + command;
     if(background){
         exec += " &>/dev/null &";
     }
