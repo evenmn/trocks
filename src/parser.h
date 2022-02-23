@@ -13,9 +13,8 @@
 #include "group.h"
 
 
-using namespace std;
 namespace fs = std::filesystem;
 
-vector<string> txt2vector(string filename);
+std::vector<std::string> txt2vector(std::string filename);
 void parser(int argc, char** argv);
 

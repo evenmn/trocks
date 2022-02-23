@@ -1,18 +1,26 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <filesystem>
+
 #include "group.h"
+
+namespace fs = std::filesystem;
 
 
 /* ----------------------------------------------------------------------------
    Add new group. A group exists if the file "txt/<groupname>.txt exists
 ------------------------------------------------------------------------------- */
 
-void add_group(string groupname, string group_dir)
+void add_group(std::string groupname, std::string group_dir)
 {
-    string path = group_dir + "/" + groupname + ".txt";
-    if(std::filesystem::exists(path)){
-        cout << "Group '" << groupname << "' already exists" << endl;
+    std::string path = group_dir + "/" + groupname + ".txt";
+    if(fs::exists(path)){
+        std::cout << "Group '" << groupname << "' already exists" << std::endl;
         exit(0);
     }
-    ofstream output(path);
+    std::ofstream output(path);
 }
 
 
@@ -20,7 +28,7 @@ void add_group(string groupname, string group_dir)
    Remove group, which means removing file "txt/<groupname>.txt
 ------------------------------------------------------------------------------- */
 
-void rm_group(string groupname, string group_dir)
+void rm_group(std::string groupname, std::string group_dir)
 {
     auto path = group_dir + "/" + groupname + ".txt";
     if(remove(path.c_str())){
@@ -33,11 +41,11 @@ void rm_group(string groupname, string group_dir)
    Add node to group. This means appending line with node name to group file
 ------------------------------------------------------------------------------- */
 
-void add_node(string groupname, string nodename, string group_dir)
+void add_node(std::string groupname, std::string nodename, std::string group_dir)
 {
     auto path = group_dir + "/" + groupname + ".txt";
-    ofstream file(path.c_str(), std::ios_base::app | std::ios_base::out);
-    file << nodename << endl;
+    std::ofstream file(path.c_str(), std::ios_base::app | std::ios_base::out);
+    file << nodename << std::endl;
 }
 
 
@@ -46,7 +54,7 @@ void add_node(string groupname, string nodename, string group_dir)
    of the txt files
 ------------------------------------------------------------------------------- */
 
-void rm_node(string groupname, string nodename, string group_dir)
+void rm_node(std::string groupname, std::string nodename, std::string group_dir)
 {}
 
 
@@ -54,10 +62,10 @@ void rm_node(string groupname, string nodename, string group_dir)
    List all nodes associated with a group and print them out to terminal
 ------------------------------------------------------------------------------- */
 
-void list_nodes(vector<string> nodes)
+void list_nodes(std::vector<std::string> nodes)
 {
     for(auto node : nodes){
-        cout << node << endl;
+        std::cout << node << std::endl;
     }
 }
 
@@ -66,9 +74,9 @@ void list_nodes(vector<string> nodes)
    List all groups and print them out to terminal
 ------------------------------------------------------------------------------- */
 
-void list_groups(vector<string> groups)
+void list_groups(std::vector<std::string> groups)
 {
     for(auto group : groups){
-        cout << group << endl;
+        std::cout << group << std::endl;
     }
 }
